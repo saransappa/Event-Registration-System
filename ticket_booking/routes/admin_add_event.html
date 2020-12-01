@@ -1,0 +1,25 @@
+<!--Ticket Booking-->
+<html>
+	<head>
+		<script> 
+			function check_creds(form) { 
+				username = form.username.value;
+				password = form.password.value;
+				if (username == '' && password== '' )alert (\"Please enter credentials\");
+				else if (password == '') alert (\"Please enter Password\");  
+				else if (username == '') alert (\"Please enter Username\"); } 
+		</script>
+	</head>
+	<body style=\"background-image: url('https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg');\">
+		<center>
+			<h1>Admin Add Event</h1>
+			<form action = "http://localhost:3000/check_admin_creds_add_event" method = "POST" onSubmit="return check_creds(this)">
+				Username: <input type = "text" name = "username"> <br><br>
+				Password: <input type = "password" name = "password"> <br><br> 
+				Event: <input type = "text" name = "event"> <br><br>
+				Ticket Count: <input type="number" min="1" name="count"><br><br>
+				<input type = "submit" value = "Submit">
+			</form>
+		</center>
+	</body>
+</html>
