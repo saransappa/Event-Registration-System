@@ -9,4 +9,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 9999
-CMD ["node", "app.js" ]
+CMD ["npm", "start" ]
