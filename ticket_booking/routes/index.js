@@ -146,7 +146,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 		  			}
 		  		}
 		  		event_html+= "</select><input type = \"submit\" value = \"Submit\"></form></center></body></html>"
-		  		//console.log(event_html);
+		  		console.log(event_html);
 				return;
 			}
 			else{
@@ -164,6 +164,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 	  var req_result = body;
 	  if(req_result=="user_exists"){
 	  	console.log("Login successful!");
+		console.log(event_html);
 	  	res.send(event_html);
 		return;
 	  }
