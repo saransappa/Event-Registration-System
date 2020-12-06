@@ -128,7 +128,7 @@ router.post('/register_check',urlencodedParser,function(req,res){
 router.post('/login_check',urlencodedParser,function(req,res){
   console.log(req.body.username);
   console.log(req.body.password);
-  event_html = "<!--Event--><meta charset=\"UTF-8\"><html> <head><title>Event selection</title></head><body style=\"background-image: url('https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg');\"><center><form action = \"http://localhost:3000/event_post\" method = \"POST\">Email Id: <input type = \"text\" name = \"email\"> <h5> Note: If you are not able to find an event in the list, it means that the tickets are no longer available.</h5>Event : <select name=\"event\" ><option value=\"default\">Select an event</option>";
+  event_html = "<!--Event--><meta charset=\"UTF-8\"><html> <head><title>Event selection</title></head><body style=\"background-image: url('https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg');\"><center><form action = \"/event_post\" method = \"POST\">Email Id: <input type = \"text\" name = \"email\"> <h5> Note: If you are not able to find an event in the list, it means that the tickets are no longer available.</h5>Event : <select name=\"event\" ><option value=\"default\">Select an event</option>";
 	var json_file;
 	request.get({
 		  headers: {'content-type' : 'application/x-www-form-urlencoded'},
@@ -152,7 +152,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 				console.log(error);
 			}
 	});
-	
+	res.send(event_html);
   var data = "username="+req.body.username + "&password="+req.body.password;
   request.post({
 	  headers: {'content-type' : 'application/x-www-form-urlencoded'},
