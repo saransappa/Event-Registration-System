@@ -135,7 +135,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 		  url:     'http://localhost:9999/event_list',
 		}, function(error, response, body){
 			if(!error){
-		  		//console.log(body);
+		  		console.log(body);
 		  		json_file = JSON.parse(body);
 		  		var s = "<option value=";
 		  		var t = "</option>"
