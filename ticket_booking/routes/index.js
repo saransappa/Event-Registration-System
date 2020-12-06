@@ -188,7 +188,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 	  }
 	}
   );
-  sleep(2000,function(){
+  sleep(5000,function(){
   store.on('update',function(){
 	  console.log("store.data = "+store.data);
 	  if(store.data==1)res.send(event_html);
