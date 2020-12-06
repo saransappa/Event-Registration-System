@@ -156,6 +156,39 @@ router.post('/login_check',urlencodedParser,function(req,res){
 		  		}
 		  		event_html+= "</select><input type = \"submit\" value = \"Submit\"></form></center></body></html>"
 		  		console.log(event_html);
+				var data = "username="+req.body.username + "&password="+req.body.password;
+				  var store = new EventEmitter();
+				  request.post({
+					  headers: {'content-type' : 'application/x-www-form-urlencoded'},
+					  url:     'http://localhost:8000/login_post',
+					  body:    data
+					}, function(error, response, body){
+					  console.log(body);
+					  var req_result = body;
+					  if(req_result=="user_exists"){
+						console.log("Login successful!");
+						//console.log(event_html);
+						store.data = 1;
+						store.emit('update');
+					  }
+					  else if(req_result=="mongo_error"){
+						store.data= 0;
+						console.log("Mongo DB error");
+					  }
+					  else if(req_result=="wrong_creds"){
+						store.data = 0;
+						console.log("Incorrect credentials!");
+					  }
+					}
+				  );
+				  console.log("start sleep");
+				  sleep(0,function(){console.log("waiting....");});
+				  console.log("stop sleep");
+				  store.on('update',function(){
+				  console.log("store.data = "+store.data);
+				  if(store.data==1)res.send(event_html);
+				  else res.send("Authentication failed");
+				  });
 				return;
 			}
 			else{
@@ -163,6 +196,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 			}
 	});
 	//res.send(event_html);
+	/*
   var data = "username="+req.body.username + "&password="+req.body.password;
   var store = new EventEmitter();
   request.post({
@@ -174,7 +208,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 	  var req_result = body;
 	  if(req_result=="user_exists"){
 	  	console.log("Login successful!");
-		console.log(event_html);
+		//console.log(event_html);
 		store.data = 1;
 		store.emit('update');
 	  }
@@ -188,13 +222,15 @@ router.post('/login_check',urlencodedParser,function(req,res){
 	  }
 	}
   );
-  sleep(5000,function(){
+  console.log("start sleep");
+  sleep(5000,function(){console.log("waiting....");});
+  console.log("stop sleep");
   store.on('update',function(){
-	  console.log("store.data = "+store.data);
-	  if(store.data==1)res.send(event_html);
-	  else res.send("Authentication failed");
+  console.log("store.data = "+store.data);
+  if(store.data==1)res.send(event_html);
+  else res.send("Authentication failed");
   });
-  });
+  */
 });
 
 router.post('/event_post',urlencodedParser, function(req,res){
