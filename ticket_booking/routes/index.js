@@ -147,12 +147,13 @@ router.post('/login_check',urlencodedParser,function(req,res){
 		  		}
 		  		event_html+= "</select><input type = \"submit\" value = \"Submit\"></form></center></body></html>"
 		  		//console.log(event_html);
+				return;
 			}
 			else{
 				console.log(error);
 			}
 	});
-	res.send(event_html);
+	//res.send(event_html);
   var data = "username="+req.body.username + "&password="+req.body.password;
   request.post({
 	  headers: {'content-type' : 'application/x-www-form-urlencoded'},
@@ -164,6 +165,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 	  if(req_result=="user_exists"){
 	  	console.log("Login successful!");
 	  	res.send(event_html);
+		return;
 	  }
 	  else if(req_result=="mongo_error"){
 	  	console.log("Mongo DB error");
