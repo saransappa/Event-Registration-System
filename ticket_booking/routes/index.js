@@ -178,7 +178,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 	  }
 	}
   );
-  console.log(send_);
+  console.log('send_ = 'send_);
   if(send_==1)res.send(event_html);
   else res.send(send_ + 'Authentication Failed');
 });
