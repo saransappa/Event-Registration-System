@@ -8,6 +8,13 @@ const request = require('request');
 var EventEmitter = require("events").EventEmitter;
 const { json } = require('express');
 /* GET home page. */
+function sleep(time, callback) {
+    var stop = new Date().getTime();
+    while(new Date().getTime() < stop + time) {
+        ;
+    }
+    callback();
+}
 router.get('/', function(req, res, next) {
   res.sendFile(__dirname + "/" + "index.html");
 });
@@ -172,17 +179,21 @@ router.post('/login_check',urlencodedParser,function(req,res){
 		store.emit('update');
 	  }
 	  else if(req_result=="mongo_error"){
-	  	console.log("Mongo DB error");
+	  	store.data= 0;
+		console.log("Mongo DB error");
 	  }
 	  else if(req_result=="wrong_creds"){
-	  	console.log("Incorrect credentials!");
+	  	store.data = 0;
+		console.log("Incorrect credentials!");
 	  }
 	}
   );
+  sleep(2000,function(){
   store.on('update',function(){
 	  console.log("store.data = "+store.data);
 	  if(store.data==1)res.send(event_html);
 	  else res.send("Authentication failed");
+  });
   });
 });
 
