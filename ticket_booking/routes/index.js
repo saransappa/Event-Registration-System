@@ -53,7 +53,7 @@ router.get('/admin_view_ticket_details',function(req,res){
 
 router.get('/admin_remove_event',function(req,res){
 
-  html = "<!--Ticket Booking--><html><head><script> function check_creds(form) { username = form.username.value; password = form.password.value; if (username == '' && password== '' )alert (\"Please enter credentials\");else if (password == '') alert (\"Please enter Password\");  else if (username == '') alert (\"Please enter Username\"); } </script></head><body style=\"background-image: url('https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg');\"><center><h1>Admin View Ticket Details</h1><form action = \"http://localhost:3000/check_admin_creds_remove_event\" method = \"POST\" onSubmit=\"return check_creds(this)\">Username: <input type = \"text\" name = \"username\"> <br><br>Password: <input type = \"password\" name = \"password\"> <br><br>Event : <select name=\"event\"><option value=\"default\">Select an event</option>";
+  html = "<!--Ticket Booking--><html><head><script> function check_creds(form) { username = form.username.value; password = form.password.value; if (username == '' && password== '' )alert (\"Please enter credentials\");else if (password == '') alert (\"Please enter Password\");  else if (username == '') alert (\"Please enter Username\"); } </script></head><body style=\"background-image: url('https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg');\"><center><h1>Admin Remove Event</h1><form action = \"/check_admin_creds_remove_event\" method = \"POST\" onSubmit=\"return check_creds(this)\">Username: <input type = \"text\" name = \"username\"> <br><br>Password: <input type = \"password\" name = \"password\"> <br><br>Event : <select name=\"event\"><option value=\"default\">Select an event</option>";
   
   var json_file;
 	request.get({
@@ -166,8 +166,8 @@ router.post('/login_check',urlencodedParser,function(req,res){
 	  if(req_result=="user_exists"){
 	  	console.log("Login successful!");
 		console.log(event_html);
-	  	res.write(event_html);
-		return ;
+	  	res.send(event_html);
+		return res ;
 	  }
 	  else if(req_result=="mongo_error"){
 	  	console.log("Mongo DB error");
@@ -177,7 +177,7 @@ router.post('/login_check',urlencodedParser,function(req,res){
 	  }
 	}
   );
-  res.send();
+  
 });
 
 router.post('/event_post',urlencodedParser, function(req,res){
