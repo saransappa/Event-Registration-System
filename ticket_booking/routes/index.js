@@ -195,48 +195,17 @@ router.post('/login_check',urlencodedParser,function(req,res){
 				console.log(error);
 			}
 	});
-	//res.send(event_html);
-	/*
-  var data = "username="+req.body.username + "&password="+req.body.password;
-  var store = new EventEmitter();
-  request.post({
-	  headers: {'content-type' : 'application/x-www-form-urlencoded'},
-	  url:     'http://localhost:8000/login_post',
-	  body:    data
-	}, function(error, response, body){
-	  console.log(body);
-	  var req_result = body;
-	  if(req_result=="user_exists"){
-	  	console.log("Login successful!");
-		//console.log(event_html);
-		store.data = 1;
-		store.emit('update');
-	  }
-	  else if(req_result=="mongo_error"){
-	  	store.data= 0;
-		console.log("Mongo DB error");
-	  }
-	  else if(req_result=="wrong_creds"){
-	  	store.data = 0;
-		console.log("Incorrect credentials!");
-	  }
-	}
-  );
-  console.log("start sleep");
-  sleep(5000,function(){console.log("waiting....");});
-  console.log("stop sleep");
-  store.on('update',function(){
-  console.log("store.data = "+store.data);
-  if(store.data==1)res.send(event_html);
-  else res.send("Authentication failed");
-  });
-  */
+	
 });
 
 router.post('/event_post',urlencodedParser, function(req,res){
 	console.log(req.body.event);
 	console.log(req.body.email);
 	var event_name = req.body.event;
+	if(event_name == "default"){
+		res.send("Please select a valid event.");
+		return;
+	}
 	var data = "event="+req.body.event +"&email="+req.body.email;
 	var output = "";
 	request.post({
@@ -263,6 +232,7 @@ router.post('/event_post',urlencodedParser, function(req,res){
 							}, function(error_, response_, body_){
 							  	if(!error_){
 							  		console.log(body_);
+									res.send("<meta charset=\"UTF-8\"><html> <head><title>Ticket Details</title></head><body style=\"background-image: url('https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg');\"><center><h4>Ticket Id :"+ body+ "<br><br> <img src=\"https://qrickit.com/api/qr.php?d="+body+"&addtext=SSS+Events&txtcolor=442EFF&fgdcolor=76103C&bgdcolor=C0F912&qrsize=150&t=p&e=m\" alt=\"QR code not displayable please click the link.\"><br><br>Click <a href=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+body+">here</a> to get the QR code for event entry.<br><br><h4>You will get a mail with these details.</h4><br><br><button><a href=\"/\">Return to main page</a></button></center></body></html>");
 							  	}
 							}
 						  );
@@ -272,7 +242,7 @@ router.post('/event_post',urlencodedParser, function(req,res){
 				  	}
 				}
 			  );
-	  			res.send("You will get a mail with event and ticket details. If you don't get it in few minutes, register again.");
+	  			//res.send("You will get a mail with event and ticket details. If you don't get it in few minutes, register again.");
 	  		}
 	  		else{
 	  			res.send("Ticket generation failed. Try again!");
@@ -323,7 +293,7 @@ router.post('/check_admin_creds_add_event',urlencodedParser, function(req,res){
 		  body: data
 		}, function(error, response, body){
 			if(!error){
-		  		res.send(body);
+		  		res.send(event + " added.");
 			}
 			else{
 				console.log(error);
