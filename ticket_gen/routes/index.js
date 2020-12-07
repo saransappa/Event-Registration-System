@@ -5,7 +5,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const {v4 : uuidv4} = require('uuid'); 
 const request = require('request');
 const MongoClient = require('mongodb').MongoClient
-const uri = "mongodb+srv://admin:adminpassword@cluster0.hgsy2.mongodb.net/test?retryWrites=true&w=majority";
+const uri = ""; // Enter your mongodb server url string
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

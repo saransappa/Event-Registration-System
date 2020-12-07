@@ -7,7 +7,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
 const MongoClient = require('mongodb').MongoClient
-const uri = "mongodb+srv://admin:adminpassword@cluster0.spqrw.mongodb.net/test?retryWrites=true&w=majority";
+const uri = ""; // Enter your mongodb server url string
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

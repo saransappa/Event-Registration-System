@@ -3,7 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 const MongoClient = require('mongodb').MongoClient
-const uri = "mongodb+srv://admin:adminpassword@cluster0.7q1ki.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "";  // Enter your mongodb server url string
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
