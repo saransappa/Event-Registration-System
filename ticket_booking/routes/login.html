@@ -19,7 +19,7 @@
 
 		    } 
         	</script>
-        	
+			<title>Login</title>
 	</head>
    <body style="background-image: url('https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg');">
    	<center>
@@ -28,8 +28,8 @@
 	   	<div id="login_panel">
 		      <h1>Login</h1>
 		      <form action = "/login_check" method = "POST" onSubmit="return check_creds(this)">
-			 Username: <input type = "text" name = "username"> <br><br>
-			 Password: <input type = "password" name = "password"> <br><br>
+			 Username: <input type = "text" name = "username" required> <br><br>
+			 Password: <input type = "password" name = "password" required> <br><br>
 			 <input type = "submit" value = "Submit">
 		      </form>
 		      <br><br>
