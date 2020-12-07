@@ -7,13 +7,13 @@ function mail(email,event, ticket){
 	var transporter = nodemailer.createTransport({
 	  service: 'gmail',
 	  auth: {
-	    user: 'sss.events.notifications@gmail.com',
-	    pass: 'event@management'
+	    user: '', // Enter your mail id
+	    pass: ''                    // Enter your mail password
 	  }
 	});
 
 	var mailOptions = {
-	  from: 'sappasaran@gmail.com',
+	  from: 'sss.events.notifications@gmail.com',
 	  to: email,
 	  subject: "Ticket details from SSS event bookings",
 	  html : html_text
